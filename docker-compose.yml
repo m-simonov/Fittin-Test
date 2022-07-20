@@ -9,16 +9,24 @@ services:
       - '8000:8000'
     depends_on:
       - mysql-db
-
+  
   mysql-db:
-    image: mysql
-    restart: always
-    environment:
-      # MYSQL_DATABASE: 'fittin'
-      MYSQL_DATABASE: '${MYSQL_DATABASE}'
-      # MYSQL_ROOT_PASSWORD: 'fittin_password'
-      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
-    ports:
-      - "3307:3306"
+    image: mysql:5.7
     volumes:
-      - ./mysql_db:/var/lib/mysql
+      - ./mysql-data:/var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: fittin_password
+      MYSQL_DATABASE: fittin
+    ports:
+      - 3307:3306
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+  
+volumes:
+  mysql-data:

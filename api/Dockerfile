@@ -5,3 +5,4 @@ WORKDIR /api
 COPY requirements.txt /api/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 ADD . /api/ 
+EXPOSE 8000
