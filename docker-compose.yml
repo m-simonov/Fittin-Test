@@ -1,0 +1,24 @@
+version: '3.1'
+services:
+  api:
+    build: ./api
+    command: python api/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/api
+    ports:
+      - '8000:8000'
+    depends_on:
+      - mysql-db
+
+  mysql-db:
+    image: mysql
+    restart: always
+    environment:
+      # MYSQL_DATABASE: 'fittin'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      # MYSQL_ROOT_PASSWORD: 'fittin_password'
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql_db:/var/lib/mysql
