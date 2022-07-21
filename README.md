@@ -12,6 +12,9 @@
 Применить миграции:
 `docker-compose run api python api/manage.py migrate`
 
+Запустить парсер фида:
+`docker-compose run api python api/manage.py parse_feed`
+
 ## Задачи
 
 - [x] Продумать и реализовать структуру данных для хранения и работы. Предпочтительно реляционная база данных. 
