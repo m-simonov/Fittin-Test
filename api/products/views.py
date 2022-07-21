@@ -1,8 +1,9 @@
+from os.path import dirname
+
 from rest_framework import generics, status
+from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.parsers import MultiPartParser
-from os.path import dirname
 
 from products.models import Product
 
@@ -51,6 +52,11 @@ class FileUploadView(APIView):
 
     def post(self, request):
         file = request.FILES['file']
+        if file.content_type != "application/xml":
+            return Response(
+                data="The file must be in 'xml' format",
+                status=status.HTTP_400_BAD_REQUEST
+            )
         opened_file = open(dirname(__file__) +
                            f'/management/commands/feed/{file.name}', 'wb+')
         for chunk in file.chunks():

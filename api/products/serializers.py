@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from products.models import Product, Offer, Category
+
+from products.models import Category, Offer, Product
 
 
 class CategoryShortSerializer(serializers.ModelSerializer):
@@ -10,6 +11,7 @@ class CategoryShortSerializer(serializers.ModelSerializer):
 
 class ProductListSerializer(serializers.ModelSerializer):
     category = CategoryShortSerializer(many=True)
+
     class Meta:
         model = Product
         fields = '__all__'

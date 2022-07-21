@@ -1,4 +1,3 @@
-import os
 import xml.etree.ElementTree as ET
 from os.path import dirname, join
 

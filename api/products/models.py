@@ -25,7 +25,7 @@ class OfferPicture(models.Model):
         related_name='pictures',
         on_delete=models.CASCADE
     )
-    picture_url = models.CharField(max_length=300)
+    picture_url = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
         return f'{self.offer.name} - {self.picture_url}'
@@ -56,7 +56,6 @@ class Product(models.Model):
 
 
 class Offer(models.Model):
-    # id = models.BigIntegerField(primary_key=True, unique=True)
     barcode = models.CharField(max_length=120, primary_key=True, unique=True)
     name = models.CharField(max_length=120)
     available = models.BooleanField()
@@ -72,19 +71,3 @@ class Offer(models.Model):
     
     class Meta:
         db_table = 'offer'
-
-    # id = models.BigIntegerField(primary_key=True, unique=True)
-    # name = models.CharField(max_length=120)
-    # price = models.FloatField()
-    # price_begin = models.FloatField()
-    # percent = models.IntegerField()
-    # category = models.ManyToManyField(
-    #     Category,
-    #     related_name='offers',
-    # )
-    # vat = models.IntegerField()
-    # model = models.CharField(max_length=120)
-    # vendor_code = models.CharField(max_length=120)
-    # description = models.TextField()
-    # barcode = models.CharField(max_length=120)
-    # params = models.JSONField()
