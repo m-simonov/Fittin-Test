@@ -19,6 +19,7 @@ services:
       MYSQL_DATABASE: fittin
     ports:
       - 3307:3306
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
 
   phpmyadmin:
     image: phpmyadmin

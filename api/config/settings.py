@@ -23,14 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-dotenv_path = join(dirname(__file__), '../../.env')
+dotenv_path = join(dirname(__file__), '../.env')
 load_dotenv(dotenv_path)
-mysql_database = os.environ.get('MYSQL_DATABASE')
-mysql_user = os.environ.get('MYSQL_USER')
-mysql_password = os.environ.get('MYSQL_PASSWORD')
-mysql_root_password = os.environ.get('MYSQL_ROOT_PASSWORD')
-mysql_host = os.environ.get('MYSQL_HOST')
-mysql_port = os.environ.get('MYSQL_PORT')
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -53,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'drf_yasg',
 
     'products',
 ]
@@ -101,11 +96,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': mysql_database,
-        'USER': mysql_user,
-        'PASSWORD': mysql_password,
-        'HOST': mysql_host,
-        'PORT': mysql_port,
+        'NAME': os.environ.get('MYSQL_DATABASE'),
+        'USER': os.environ.get('MYSQL_USER'),
+        'PASSWORD': os.environ.get('MYSQL_ROOT_PASSWORD'),
+        'HOST': os.environ.get('MYSQL_HOST'),
+        'PORT': os.environ.get('MYSQL_PORT'),
     }
 }
 
@@ -145,6 +140,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'static'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
